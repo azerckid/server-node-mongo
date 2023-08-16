@@ -1,4 +1,4 @@
-const { LoginModelCollecton } = require("../database/mongoDB");
+const { LoginModelCollecton, ExcelModel } = require("../database/mongoDB");
 
 const controlPost = {
   login: async (req, res) => {
@@ -39,6 +39,27 @@ const controlPost = {
       }
     } catch (err) {
       console.log(err);
+    }
+  },
+  importExcel: async (req, res) => {
+    try {
+      const data = req.body;
+      console.log(data.length);
+      for (let i = 0; i < data.length; i++) {
+        const newExcel = new ExcelModel({
+          Id: data[i].Id,
+          FirstName: data[i].FirstName,
+          LastName: data[i].LastName,
+          Gender: data[i].Gender,
+          Country: data[i].Country,
+          Age: data[i].Age,
+          Date: data[i].Date,
+        });
+        newExcel.save();
+      }
+      res.json({ message: "Excel import success" });
+    } catch (err) {
+      res.send(new Error(400, err.message));
     }
   },
 };

@@ -12,8 +12,8 @@ mongoose
   .catch((err) => console.log(err));
 
 const UserSchema = new mongoose.Schema({
-  name: String,
-  age: Number,
+  name: { type: String },
+  age: { type: Number },
 });
 const UserModel = mongoose.model("users", UserSchema);
 
@@ -33,4 +33,29 @@ const LoginSchema = new mongoose.Schema({
 });
 const LoginModelCollecton = mongoose.model("signup", LoginSchema);
 
-module.exports = { UserModel, LoginModelCollecton };
+const ExcelSchema = new mongoose.Schema({
+  Id: {
+    type: String,
+  },
+  FirstName: {
+    type: String,
+  },
+  LastName: {
+    type: String,
+  },
+  Gender: {
+    type: String,
+  },
+  Country: {
+    type: String,
+  },
+  Age: {
+    type: Number,
+  },
+  Date: {
+    type: String,
+  },
+});
+const ExcelModel = mongoose.model("excel", ExcelSchema);
+
+module.exports = { UserModel, LoginModelCollecton, ExcelModel };
